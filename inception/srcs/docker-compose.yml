@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks: 
+      - inception  # Conectar a la red "inception"
+    depends_on:
+      - wordpress
+    build:
+      context: ./requeriments/nginx
+    env_file: ./.env
+    ports:
+      - "443:443"
+    restart: on-failure
+
+  mariadb:
+    container_name: mariadb
+    hostname: mariadb.srcs_inception
+    networks:
+      - inception  # Conectar a la red "inception"
+    build: 
+      context: ./requeriments/mariaDB
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: "mariadb"
+      WORDPRESS_DB_USER: "jlimones"
+      WORDPRESS_DB_PASSWORD: "1234"
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_EMAIL: "jlimones@studen.42malaga.com"
+      SQL_ROOT_PASSWORD: "12345"
+      SQL_USER: "jlimones@wordpress.srcs_inception"
+
+    expose:
+      - "3306"
+
+  wordpress:
+    container_name: wordpress
+    hostname: wordpress.srcs_inception
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception  # Conectar a la red "inception"
+    build: 
+      context: ./requeriments/wordpress
+    depends_on:
+      - mariadb
+    environment:
+      WORDPRESS_DB_HOST: "mariadb"
+      WORDPRESS_DB_USER: "jlimones"
+      WORDPRESS_DB_PASSWORD: "1234"
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_EMAIL: "jlimones@studen.42malaga.com"
+      SQL_ROOT_PASSWORD: "12345"
+      SQL_USER: "jlimones@wordpress.srcs_inception"
+
+    restart: on-failure
+    ports:
+      - "9000:9000"
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/jlimones/data/wordpress'
+  mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/jlimones/data/mariadb'
+
+networks:
+  inception:
+    driver: bridge
