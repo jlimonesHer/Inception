@@ -25,8 +25,8 @@ cp /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php
 		--admin_user=$WORDPRESS_DB_USER --admin_password=$WORDPRESS_DB_PASSWORD \
 		--admin_email=$WORDPRESS_DB_EMAIL --path=/var/www/wordpress
 
-	wp user create $WORDPRESS_DB_USER $WORDPRESS_DB_EMAIL --user_pass=$WORDPRESS_DB_PASSWORD \
-		--role=author --allow-root --path=/var/www/wordpress
+	wp user create $WORDPRESS_DB_USER2 $WORDPRESS_DB_EMAIL2 --user_pass=$WORDPRESS_DB_PASSWORD2 \
+		 --role=author --allow-root --path=/var/www/wordpress
 else
     echo "El archivo wp-config.php ya existe."
 fi

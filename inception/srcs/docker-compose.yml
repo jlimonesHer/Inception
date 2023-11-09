@@ -39,17 +39,9 @@ services:
       - inception  # Conectar a la red "inception"
     build: 
       context: ./requeriments/wordpress
+    env_file: ./requeriments/.env
     depends_on:
       - mariadb
-    environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_USER: jlimones
-      WORDPRESS_DB_PASSWORD: 1234
-      WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_EMAIL: jlimones@studen.42malaga.com
-      SQL_ROOT_PASSWORD: 12345
-      SQL_USER: jlimones@wordpress.srcs_inception
-
     restart: on-failure
     ports:
       - "9000:9000"
