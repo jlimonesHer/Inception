@@ -11,7 +11,7 @@ services:
       - wordpress
     build:
       context: ./requeriments/nginx
-    env_file: ./.env
+    env_file: ./requeriments/.env
     ports:
       - "443:443"
     restart: on-failure
@@ -23,18 +23,10 @@ services:
       - inception  # Conectar a la red "inception"
     build: 
       context: ./requeriments/mariaDB
+    env_file: ./requeriments/.env
     volumes:
       - mariadb:/var/lib/mysql
     restart: unless-stopped
-    environment:
-      WORDPRESS_DB_HOST: "mariadb"
-      WORDPRESS_DB_USER: "jlimones"
-      WORDPRESS_DB_PASSWORD: "1234"
-      WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_EMAIL: "jlimones@studen.42malaga.com"
-      SQL_ROOT_PASSWORD: "12345"
-      SQL_USER: "jlimones@wordpress.srcs_inception"
-
     expose:
       - "3306"
 
@@ -50,13 +42,13 @@ services:
     depends_on:
       - mariadb
     environment:
-      WORDPRESS_DB_HOST: "mariadb"
-      WORDPRESS_DB_USER: "jlimones"
-      WORDPRESS_DB_PASSWORD: "1234"
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: jlimones
+      WORDPRESS_DB_PASSWORD: 1234
       WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_EMAIL: "jlimones@studen.42malaga.com"
-      SQL_ROOT_PASSWORD: "12345"
-      SQL_USER: "jlimones@wordpress.srcs_inception"
+      WORDPRESS_DB_EMAIL: jlimones@studen.42malaga.com
+      SQL_ROOT_PASSWORD: 12345
+      SQL_USER: jlimones@wordpress.srcs_inception
 
     restart: on-failure
     ports:

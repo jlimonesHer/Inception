@@ -18,7 +18,7 @@ RUN chmod +x /auto_config.sh
 
 # Crear directorio para PHP-FPM
 RUN mkdir -p /run/php
-RUN		useradd jlimones && groupadd glimones && usermod -aG glimones jlimones
+RUN	useradd jlimones && groupadd glimones && usermod -aG glimones jlimones
 
 # Indicar el puerto en el que se ejecutará PHP-FPM (puerto 9000)
 EXPOSE 9000
