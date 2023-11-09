@@ -11,7 +11,7 @@ services:
       - wordpress
     build:
       context: ./requeriments/nginx
-    env_file: ./requeriments/.env
+    env_file: ./.env
     ports:
       - "443:443"
     restart: on-failure
@@ -23,7 +23,7 @@ services:
       - inception  # Conectar a la red "inception"
     build: 
       context: ./requeriments/mariaDB
-    env_file: ./requeriments/.env
+    env_file: ./.env
     volumes:
       - mariadb:/var/lib/mysql
     restart: unless-stopped
@@ -39,7 +39,7 @@ services:
       - inception  # Conectar a la red "inception"
     build: 
       context: ./requeriments/wordpress
-    env_file: ./requeriments/.env
+    env_file: ./.env
     depends_on:
       - mariadb
     restart: on-failure
