@@ -52,13 +52,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/jlimones/data/wordpress'
+      device: '/Users/jlimones/data/wordpress'
   mariadb:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/jlimones/data/mariadb'
+      device: '/Users/jlimones/data/mariadb'
 
 networks:
   inception:

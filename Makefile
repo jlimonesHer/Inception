@@ -1,9 +1,9 @@
 # Nombre del archivo Docker Compose
 DOCKER_COMPOSE_FILE := srcs/docker-compose.yml
 
-DATA := /home/jlimones/data
-MARIADB_DATA_DIR := /home/jlimones/data/mariadb
-WORDPRESS_DATA_DIR := /home/jlimones/data/wordpress
+DATA := /Users/jlimones/data
+MARIADB_DATA_DIR := /Users/jlimones/data/mariadb
+WORDPRESS_DATA_DIR := /Users/jlimones/data/wordpress
 
 change_permissions:
 	chmod 777 $(MARIADB_DATA_DIR)
